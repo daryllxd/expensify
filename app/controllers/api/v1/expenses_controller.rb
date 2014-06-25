@@ -1,15 +1,17 @@
 class Api::V1::ExpensesController < ApplicationController
+  respond_to :json
+
   def index
     @expenses = Expense.all
-    respond_to do |format|
-      format.json { render :json => @expenses }
-    end
+    render json: @expenses
   end
 
   def create
-    Expense.create(allowed_params)
-    respond_to do |format|
-      format.json { render :json => 1 }
+    @expense = Expense.new(allowed_params)
+    if @expense.save
+      render json: @expense
+    else
+      render json: @expense.errors, status: :unprocessable_entity
     end
   end
 
