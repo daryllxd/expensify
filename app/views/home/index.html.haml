@@ -2,12 +2,22 @@
   %h1 Expensify
   .well{"ng-repeat" => "expense in expenses"}
     %h3 {{ expense.name }}
-    %h4 Yolo
+    %hr
+    %p
+      Description: {{ expense.description }}
+      %strong Category: {{ expense.category }}
   .col-md-6.well
     %h2 Add Expense
     %form
       .form-group
         %label{"for" => "name"} Name
         %input.form-control{"type" => "text", "placeholder" => "Put expense name", "ng-model" => "current_expense.name"}
+      .form-group
+        %label{"for" => "name"} Description
+        %input.form-control{"type" => "text", "placeholder" => "Description", "ng-model" => "current_expense.description"}
+      .form-group
+        %label{"for" => "name"} Category
+        %select.form-control{"ng-model" => "current_expense.category", "ng-options" => "f for f in categories"}
+          %option{"value" => ""} Pick a Category
       .form-group
         %button.form-control.btn.btn-primary{"ng-click" => "add_expense()"} Submit
