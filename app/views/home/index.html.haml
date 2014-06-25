@@ -1,5 +1,7 @@
-.container
-  %h1 Expensify
+.container{"ng-app" => "Expensify", "ng-controller" => "HelloWorldController"}
+  %h1 Expensify {{ messageOfTheDay }}
   - Expense.all.each do |expense|
     %h2= expense.name
     %p= expense.description
+  %input{"type" => "text", "class" => "form-control", "ng-model" => "myText"}
+  %p {{ myText }}
