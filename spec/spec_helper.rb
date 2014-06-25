@@ -10,6 +10,7 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Requests::JsonHelpers, type: :request
 
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
