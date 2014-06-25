@@ -22,4 +22,15 @@ describe 'Expenses API' do
       expect(test_names).to eq ['Foodies', 'Hoodies']
     end
   end
+
+  context '#create' do
+    it 'creates the expense' do
+      new_expense = attributes_for(:expense, name: 'Goodies')
+
+      post '/api/v1/expenses', new_expense, { "Accept" => "application/json" }
+
+      expect(Expense.count).to eq 1
+      expect(Expense.first.name).to eq 'Goodies'
+    end
+  end
 end

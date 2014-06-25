@@ -55,8 +55,6 @@ group :development do
   gem 'foreman'
   gem 'html2haml'
   gem 'hub', :require=>nil
-  gem 'pry'
-  gem 'pry-rails'
   gem 'quiet_assets'
   gem 'rails_layout'
 end
@@ -65,6 +63,8 @@ group :development, :test do
   gem 'childprocess', '0.3.9'
   gem 'hirb'
   gem 'newrelic_rpm'
+  gem 'pry'
+  gem 'pry-rails'
   gem 'rspec-rails', '2.14.0'
   gem 'spring-commands-rspec'
 end
