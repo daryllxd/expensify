@@ -1,11 +1,17 @@
-Expensify.controller "ExpensesController", ($scope) ->
+Expensify.controller "ExpensesController", ($scope, $http) ->
   $scope.expenses = []
-  $scope.current_expense = {}
+  $scope.currentExpense = {}
   $scope.categories = ['Food', 'Good', 'Mood']
 
-  $scope.clear_expense = () ->
-    $scope.current_expense = {}
+  $scope.populateExpenses = () ->
+    url = "/api/v1/expenses/"
+    $http({method: "GET", url: url })
+      .success (data) ->
+        $scope.expenses = data
 
-  $scope.add_expense = () ->
-    $scope.expenses.push( $scope.current_expense )
-    $scope.clear_expense()
+  $scope.clearExpense = () ->
+    $scope.currentExpense = {}
+
+  $scope.addExpense = () ->
+    $scope.expenses.push( $scope.currentExpense )
+    $scope.clearExpense()
