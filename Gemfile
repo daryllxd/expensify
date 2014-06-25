@@ -48,17 +48,31 @@ gem 'pg'
 gem 'thin'
 
 group :development do
+  gem 'annotate'
+  gem 'awesome_print'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_20]
+  gem 'binding_of_caller'
   gem 'foreman'
   gem 'html2haml'
   gem 'hub', :require=>nil
+  gem 'pry'
+  gem 'pry-rails'
   gem 'quiet_assets'
   gem 'rails_layout'
 end
 
 group :development, :test do
-  gem 'pry-rails'
-  gem 'pry-rescue'
+  gem 'childprocess', '0.3.9'
+  gem 'hirb'
+  gem 'newrelic_rpm'
+  gem 'rspec-rails', '2.14.0'
+  gem 'spring-commands-rspec'
 end
 
+group :test do
+  gem 'capybara', '2.1.0'
+  gem 'database_cleaner', '1.2.0'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'ffaker', '1.23'
+  gem 'shoulda-matchers', '~> 2.1.0'
+end
