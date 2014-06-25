@@ -1,6 +1,7 @@
 .container{"ng-app" => "Expensify", "ng-controller" => "ExpensesController", "ng-init" => "populateExpenses()"}
   %h1 Expensify
   .well{"ng-repeat" => "expense in expenses"}
+    %h2{"ng-show" => "searching"} Searching
     %h3 {{ expense.name }}
     %hr
     %p
@@ -8,7 +9,7 @@
       %strong Category: {{ expense.category }}
   .col-md-6.well
     %h2 Add Expense
-    %form
+    %form{"ng-submit" => "save()"}
       .form-group
         %label{"for" => "name"} Name
         %input.form-control{"type" => "text", "placeholder" => "Put expense name", "ng-model" => "currentExpense.name"}
@@ -20,4 +21,4 @@
         %select.form-control{"ng-model" => "currentExpense.category", "ng-options" => "f for f in categories"}
           %option{"value" => ""} Pick a Category
       .form-group
-        %button.form-control.btn.btn-primary{"ng-click" => "addExpense()"} Submit
+        %button.form-control.btn.btn-primary Submit
