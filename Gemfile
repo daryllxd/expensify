@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.0.3'
 
-# gem 'active_model_serializers'
+gem 'active_model_serializers'
 gem 'bootstrap-sass'
 gem 'bower-rails', '~> 0.7.3'
 gem 'coffee-rails', '~> 4.0.0'
