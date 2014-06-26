@@ -23,3 +23,8 @@ Expensify.controller "ExpensesController", ($scope, $http) ->
       .success (data) ->
         $scope.addExpense()
         $scope.populateExpenses()
+
+  $scope.delete = (expense) ->
+    $http({ method: "DELETE", url: expense.url})
+      .success (response) ->
+        $scope.populateExpenses()

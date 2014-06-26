@@ -43,10 +43,12 @@ describe 'Expenses API' do
   context '#delete' do
     it 'delete the expense' do
       expense = create(:expense)
+      expense = create(:expense)
+      expect(Expense.count).to eq 2
 
       delete '/api/v1/expenses/1', {}, json_header
 
-      expect(Expense.count).to eq 0
+      expect(Expense.count).to eq 1
     end
   end
 end
