@@ -15,6 +15,13 @@ class Api::V1::ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    @expense = Expense.where(allowed_params[:id])
+    Expense.delete(@expense)
+
+    render json: @expense
+  end
+
   def allowed_params
     params.permit(:name, :description, :category)
   end

@@ -39,4 +39,14 @@ describe 'Expenses API' do
       expect(json_response.to_s).to include 'can\'t be blank'
     end
   end
+
+  context '#delete' do
+    it 'delete the expense' do
+      expense = create(:expense)
+
+      delete '/api/v1/expenses/1', {}, json_header
+
+      expect(Expense.count).to eq 0
+    end
+  end
 end
