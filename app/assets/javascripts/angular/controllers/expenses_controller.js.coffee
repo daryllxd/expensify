@@ -1,4 +1,4 @@
-Expensify.controller "ExpensesController", ($scope, Expense, $http) ->
+Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
   $scope.expenses = []
   $scope.currentExpense = {}
   $scope.categories = ['Food', 'Good', 'Mood']
@@ -23,3 +23,21 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http) ->
     $http({ method: "DELETE", url: expense.url})
       .success (response) ->
         $scope.populateExpenses()
+
+  $scope.testPromise = () ->
+    deferred = $q.defer()
+
+    promise = deferred.promise
+
+    promise.then(
+      (result) ->
+        alert("Success: #{result}")
+      (reason) ->
+        alert("Error: #{reason}"))
+
+    if($scope.fail)
+      deferred.reject('sorry')
+    else
+      deferred.resolve('C00l')
+
+

@@ -1,4 +1,4 @@
-Expensify.factory 'Expense', ($http) ->
+Expensify.factory 'Expense', ($http, $q) ->
   self = {}
 
   self.getExpenses = (scope) ->
