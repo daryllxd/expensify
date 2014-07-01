@@ -7,7 +7,7 @@ class Api::V1::ExpensesController < ApplicationController
   end
 
   def index
-    @expenses = Expense.all
+    @expenses = Expense.all.page(params[:page]).per(2)
     render json: @expenses
   end
 

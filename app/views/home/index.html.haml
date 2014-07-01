@@ -13,6 +13,13 @@
     %p
       Description: {{ expense.description }}
       %strong Category: {{ expense.category }}
+  .well
+    %ul.pagination
+      %li
+        %a{"ng-click" => "setPage(currentPage - 1)"}<<
+      %li
+        %a{"ng-click" => "setPage(currentPage + 1)"}>>
+
   .col-md-6.well
     %h2 Add Expense
     %form{"ng-submit" => "save()"}
