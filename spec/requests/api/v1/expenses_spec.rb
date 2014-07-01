@@ -51,4 +51,14 @@ describe 'Expenses API' do
       expect(Expense.count).to eq 1
     end
   end
+
+  context '#edit' do
+    it 'edits the expense' do
+      expense = create(:expense, name: 'Dary')
+
+      put '/api/v1/expenses/1', {name: 'Bary'}, json_header
+
+      expect(Expense.first.name).to eq 'Bary'
+    end
+  end
 end

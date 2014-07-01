@@ -15,9 +15,15 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
     $scope.clearExpense()
 
   $scope.save = () ->
-    Expense.save($scope.currentExpense)
+    if $scope.currentExpense.id?
+      Expense.update($scope.currentExpense)
+    else
+      Expense.save($scope.currentExpense)
     $scope.currentExpense = {}
     $scope.populateExpenses()
+
+  $scope.edit = (expense) ->
+    $scope.currentExpense = Expense.get({id: expense.id })
 
   $scope.delete = (expense) ->
     $http({ method: "DELETE", url: expense.url})

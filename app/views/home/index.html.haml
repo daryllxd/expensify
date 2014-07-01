@@ -3,6 +3,9 @@
   .well{"ng-repeat" => "expense in expenses"}
     %h2{"ng-show" => "searching"} Searching
     %h3 {{ expense.name }}
+    .btn.btn-default{"ng-click" => "edit(expense)"}
+      %i.fa.fa-code
+      Edit
     .btn.btn-default{"ng-click" => "delete(expense)"}
       %i.fa.fa-trash-o
       Delete

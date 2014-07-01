@@ -1,6 +1,11 @@
 class Api::V1::ExpensesController < ApplicationController
   respond_to :json
 
+  def show
+    @book = Expense.where(allowed_params).first
+    render json: @book, root: false
+  end
+
   def index
     @expenses = Expense.all
     render json: @expenses
@@ -19,6 +24,12 @@ class Api::V1::ExpensesController < ApplicationController
     @expense = Expense.where(allowed_params)
     Expense.delete(@expense)
 
+    render json: @expense
+  end
+
+  def update
+    @expense = Expense.find(params[:id])
+    @expense.update(allowed_params)
     render json: @expense
   end
 
