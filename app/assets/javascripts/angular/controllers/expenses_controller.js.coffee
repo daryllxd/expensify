@@ -4,7 +4,8 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
   $scope.categories = ['Food', 'Good', 'Mood']
 
   $scope.populateExpenses = () ->
-    Expense.getExpenses($scope)
+    Expense.query().$promise.then (expenses) ->
+      $scope.expenses = expenses
 
   $scope.clearExpense = () ->
     $scope.currentExpense = {}
@@ -14,10 +15,9 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
     $scope.clearExpense()
 
   $scope.save = () ->
-    $http({ method: "POST", url: $scope.url, data: $scope.currentExpense })
-      .success (data) ->
-        $scope.addExpense()
-        $scope.populateExpenses()
+    Expense.save($scope.currentExpense)
+    $scope.currentExpense = {}
+    $scope.populateExpenses()
 
   $scope.delete = (expense) ->
     $http({ method: "DELETE", url: expense.url})
