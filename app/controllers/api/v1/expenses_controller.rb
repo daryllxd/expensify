@@ -8,7 +8,12 @@ class Api::V1::ExpensesController < ApplicationController
 
   def index
     @expenses = Expense.all.page(params[:page]).per(2)
-    render json: @expenses
+    render json: { expenses: @expenses, meta: {
+      number_of_pages: @expenses.num_pages,
+      current_page: @expenses.current_page,
+      total_count: @expenses.total_count
+    }
+    }
   end
 
   def create

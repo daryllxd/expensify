@@ -1,14 +1,14 @@
 Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
-  $scope.init = () ->
-    $scope.currentPage = 1
 
   $scope.expenses = []
   $scope.currentExpense = {}
   $scope.categories = ['Food', 'Good', 'Mood']
 
   $scope.populateExpenses = () ->
-    Expense.query(page: $scope.currentPage).$promise.then (expenses) ->
-      $scope.expenses = expenses
+    Expense.get(page: $scope.currentPage).$promise.then (response) ->
+      $scope.expenses = response.expenses
+      $scope.paging = response.meta
+      $scope.createPages()
 
   $scope.clearExpense = () ->
     $scope.currentExpense = {}
@@ -34,8 +34,11 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
 
   $scope.setPage = (newPage) ->
     newPage = 1 if newPage < 1
-    $scope.currentPage = newPage
+    $scope.currentPage = newPage if newPage <= $scope.paging.number_of_pages
     $scope.populateExpenses()
+
+  $scope.createPages = () ->
+    $scope.pages = [1..$scope.paging.number_of_pages]
 
   $scope.testPromise = () ->
     deferred = $q.defer()

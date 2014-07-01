@@ -5,7 +5,7 @@ describe 'Expenses API' do
     it 'returns nothing when no expenses' do
       get '/api/v1/expenses', {}, json_header
 
-      expect(json_response).to eq []
+      expect(json_response['expenses']).to eq []
     end
 
     it 'returns all expenses' do
@@ -13,9 +13,20 @@ describe 'Expenses API' do
       expense2 = create(:expense, name: 'Hoodies')
       get '/api/v1/expenses', {}, json_header
 
-      test_names = json_response.map { |x| x['name'] }
+      test_names = json_response['expenses'].map { |x| x['name'] }
       expect(test_names).to eq ['Foodies', 'Hoodies']
     end
+
+    it 'returns pagination data' do
+      10.times { create(:expense, name: 'Foodies') }
+      get '/api/v1/expenses', {}, json_header
+
+      pagination_data = json_response['meta']
+      expect(pagination_data['number_of_pages']).to eq 5
+      expect(pagination_data['current_page']).to eq 1
+      expect(pagination_data['total_count']).to eq 10
+    end
+
   end
 
   context '#create' do
