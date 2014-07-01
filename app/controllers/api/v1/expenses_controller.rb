@@ -24,7 +24,7 @@ class Api::V1::ExpensesController < ApplicationController
     @expense = Expense.where(allowed_params)
     Expense.delete(@expense)
 
-    render json: @expense
+    render json: @expense, root: false
   end
 
   def update

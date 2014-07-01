@@ -26,9 +26,8 @@ Expensify.controller "ExpensesController", ($scope, Expense, $http, $q) ->
     $scope.currentExpense = Expense.get({id: expense.id })
 
   $scope.delete = (expense) ->
-    $http({ method: "DELETE", url: expense.url})
-      .success (response) ->
-        $scope.populateExpenses()
+    expense.$delete()
+    $scope.populateExpenses()
 
   $scope.testPromise = () ->
     deferred = $q.defer()
