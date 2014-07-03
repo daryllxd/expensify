@@ -22,6 +22,7 @@
           {{ page }}
       %li
         %a{"ng-click" => "setPage(currentPage + 1)"}>>
+  %div{"expensify-paging" => ""}
 
   .col-md-6.well
     %h2 Add Expense
@@ -42,5 +43,4 @@
   %h1 Promise Test
   %button{"ng-click" => "testPromise()"}Click!
   %input{"type" => "checkbox", "ng-model" => "fail"}Fail
-
 
